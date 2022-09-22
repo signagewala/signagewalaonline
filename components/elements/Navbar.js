@@ -9,7 +9,7 @@ export default function Navbar({ design }) {
     }
     return (
         <>
-            <nav className="navbar navbar-expand-lg shadow-md py-2 bg-white relative flex items-center w-full justify-between">
+            <div className="navbar navbar-expand-lg shadow-md py-2 bg-white relative flex items-center w-full justify-between">
                 <div className="px-6 w-full flex flex-wrap items-center justify-between">
                     <div className="flex items-center">
                         <button
@@ -17,11 +17,11 @@ export default function Navbar({ design }) {
                             className="navbar-toggler border-0 py-3 lg:hidden leading-none text-xl bg-transparent text-gray-600 hover:text-gray-700 focus:text-gray-700 transition-shadow duration-150 ease-in-out mr-2"
                             type="button"
                         >
-                            <i class="fa-solid fa-bars"></i>
+                            <i className="fa-solid fa-bars"></i>
                         </button>
                         <div className="w-24 navbar-brand" >
                             <Link href="/">
-                                <Image className='cursor-pointer' src={design.logo} width={design.logosize.width} height={design.logosize.height} alt="logo" />
+                                <a href=""> <Image className='cursor-pointer' src={design.logo} width={design.logosize.width} height={design.logosize.height} alt="logo" /></a>
                             </Link>
                         </div>
                     </div>
@@ -47,21 +47,8 @@ export default function Navbar({ design }) {
                         </Link>
                     </div>
                 </div>
-            </nav>
+            </div>
 
-            {/* //old navbar */}
-            {/* <div className={`flex flex-grow-0 justify-between items-center px-4 py-1 h-auto
-            ${design.bgcolor} 
-            ${design.textcol}`}>
-                <div className='w-28'>
-                    <Image src={design.logo} width={design.logosize.width} height={design.logosize.height} alt='Logo' />
-                </div>
-                <div className='flex gap-2'>
-                    {design.content.map((menu, i) => (
-                        <div key={i}>{menu.menu}</div>
-                    ))}
-                </div>
-            </div> */}
         </>
     )
 }

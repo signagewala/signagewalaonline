@@ -15,7 +15,7 @@ export default function Home() {
 
           <div className="px-6 py-12 md:px-12 text-gray-800 text-center lg:text-left">
             <div className="container mx-auto xl:px-32">
-              <div className="grid lg:grid-cols-2 flex items-center">
+              <div className="grid lg:grid-cols-2 items-center">
                 <div className="md:mt-12 lg:mt-0 mb-12 lg:mb-0">
                   <div className="block rounded-lg shadow-lg px-6 py-12 md:px-12 lg:-mr-14">
                     <h1 className="text-4xl md:text-5xl xl:text-6xl font-bold tracking-tight mb-12">Your realtime <br /><span className="text-blue-600">Retail Brand Manager</span></h1>
