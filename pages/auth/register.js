@@ -4,9 +4,11 @@ import Auth from '../../components/layouts/Auth';
 
 export default function Register() {
     const [formData, setFormData] = useState({})
+    const [showOtp, setShowOtp] = useState(false)
     const handleInput = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value })
     }
+    console.log(formData)
     return (
         <div>
 
@@ -25,7 +27,7 @@ export default function Register() {
                             />
                         </div>
                         <div className="xl:ml-20 xl:w-5/12 lg:w-5/12 md:w-8/12 mb-12 md:mb-0">
-                            <form>
+                            <form className='p-10 md:p-0'>
                                 <div className="flex flex-row items-center justify-center lg:justify-start">
                                     <p className="text-lg mb-0 mr-4">Register with</p>
                                     <button
@@ -83,17 +85,17 @@ export default function Register() {
                                     <p className="text-center font-semibold mx-4 mb-0">Or</p>
                                 </div>
 
-                                <div className="md:flex md:flex-grow-0 md:gap-4">
+                                <div className="md:flex md:flex-grow-0 md:gap-4 items-center">
                                     {/* <!-- First Name input --> */}
                                     <div className="mb-6">
                                         <input
+                                            onChange={handleInput}
                                             autoFocus
                                             autoComplete='off'
-                                            onChange={handleInput}
-                                            name="fname"
-                                            id="fname"
+                                            name='fname'
+                                            id='fname'
                                             type="text"
-                                            className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                                            className="form-control block w-full px-4 py-2  text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                                             placeholder="First Name"
                                         />
                                     </div>
@@ -104,7 +106,7 @@ export default function Register() {
                                             name="lname"
                                             id="lname"
                                             type="text"
-                                            className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                                            className="form-control block w-full px-4 py-2  text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                                             placeholder="Last Name"
                                         />
                                     </div>
@@ -117,7 +119,7 @@ export default function Register() {
                                         name="cname"
                                         id="cname"
                                         type="text"
-                                        className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                                        className="form-control block w-full px-4 py-2  text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                                         placeholder="Company Name"
                                     />
                                 </div>
@@ -129,30 +131,45 @@ export default function Register() {
                                         name="email"
                                         id="email"
                                         type="text"
-                                        className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                                        className="form-control block w-full px-4 py-2  text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                                         placeholder="Email address"
                                     />
                                 </div>
-                                <div className="flex flex-grow-0 gap-4">
+                                <div className="flex flex-grow-0 items-center">
                                     {/* <!-- Mobile input --> */}
-                                    <div className="mb-6 w-10/12">
+                                    <div className="mb-6 w-11/12">
                                         <input
                                             onChange={handleInput}
                                             name="mobile"
                                             id="mobile"
                                             type="text"
-                                            className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                                            className="form-control block w-full px-4 py-2  text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                                             placeholder="Mobile No."
                                         />
                                     </div>
                                     {/* <!-- OTP Button --> */}
-                                    <div className="mb-6 w-2/12">
+                                    <div className="mb-6 w-1/12">
                                         <button
+                                            onClick={setShowOtp}
                                             type="button"
-                                            className="w-full px-4 py-2 text-l font-normal text-white bg-emerald-800 hover:bg-emerald-500 bg-clip-padding border border-solid border-gray-300 rounded-full transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                                        ><i className="fa-brands fa-whatsapp"></i></button>
+                                            className="bg-emerald-600 hover:bg-emerald-500 border-2 border-emerald-300 px-1 md:px-3 h-11 rounded-r-full text-white shadow-xl"><i className="fa-brands fa-whatsapp"></i></button>
                                     </div>
                                 </div>
+                                {showOtp ?
+
+                                    <div className="mb-6">
+                                        <input
+                                            onChange={handleInput}
+                                            name="otp"
+                                            id="otp"
+                                            type="tel"
+                                            className="w-full px-4 py-2  text-gray-700 bg-white bg-clip-padding border border-dashed border-red-500 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-500 focus:outline-none"
+                                            placeholder="Enter OTP"
+                                        />
+                                    </div>
+                                    :
+                                    ""
+                                }
 
                                 {/* <!-- Password input --> */}
                                 <div className="mb-6">
@@ -162,7 +179,7 @@ export default function Register() {
                                         name="pass"
                                         id="pass"
                                         type="password"
-                                        className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                                        className="form-control block w-full px-4 py-2  text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                                         placeholder="Choose Password"
                                     />
                                 </div>
@@ -174,7 +191,7 @@ export default function Register() {
                                         name="cpass"
                                         id="cpass"
                                         type="password"
-                                        className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                                        className="form-control block w-full px-4 py-2  text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                                         placeholder="Confirm Password"
                                     />
                                 </div>

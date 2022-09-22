@@ -11,7 +11,7 @@ export default function Login() {
         <div>
 
             <section className="h-screen">
-                <div className="container px-6 py-12 h-full">
+                <div className="container p-4 md:p-0 py-12 h-full">
                     <div className="flex justify-center items-center flex-wrap h-full g-6 text-gray-800">
                         <div className="md:w-8/12 lg:w-6/12 mb-12 md:mb-0">
                             <img
@@ -31,7 +31,7 @@ export default function Login() {
                                         name='email'
                                         id='email'
                                         type="text"
-                                        className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                                        className="form-control block w-full px-4 py-2 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                                         placeholder="Email address"
                                     />
                                 </div>
@@ -44,7 +44,7 @@ export default function Login() {
                                         name='pass'
                                         id='pass'
                                         type="password"
-                                        className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                                        className="form-control block w-full px-4 py-2 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                                         placeholder="Password"
                                     />
                                 </div>
