@@ -1,4 +1,5 @@
 import Head from 'next/head'
+import Auth from '../components/layouts/Auth';
 
 export default function Home() {
   return (
@@ -12,3 +13,4 @@ export default function Home() {
     </div>
   )
 }
+Home.layout = Auth;
