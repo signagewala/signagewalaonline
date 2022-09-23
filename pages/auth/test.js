@@ -4,6 +4,7 @@ import styles from '../../styles/Home.module.css';
 import connectMongo from '../../utils/connectMongo';
 import Test from '../../models/testModel';
 import Auth from '../../components/layouts/Auth'
+import { useState } from 'react';
 
 
 export const getServerSideProps = async () => {
@@ -30,21 +31,25 @@ export const getServerSideProps = async () => {
 };
 
 export default function Home({ data }) {
-    // const createTest = async () => {
-    //     const randomNum = Math.floor(Math.random() * 1000);
-    //     const res = await fetch('/api/test/add', {
-    //         method: 'POST',
-    //         headers: {
-    //             'Content-Type': 'application/json',
-    //         },
-    //         body: JSON.stringify({
-    //             name: `Test ${randomNum}`,
-    //             email: `test${randomNum}@test.com`,
-    //         }),
-    //     });
-    //     const data = await res.json();
-    //     console.log(data);
-    // };
+    const [formData, setFormData] = useState({})
+    const handleInput = (e) => {
+        setFormData({ ...formData, [e.target.name]: e.target.value })
+    }
+    const createTest = async () => {
+        const randomNum = Math.floor(Math.random() * 1000);
+        const res = await fetch('/api/test/add', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                name: formData.name,
+                email: formData.email,
+            }),
+        });
+        const data = await res.json();
+        console.log(data);
+    };
     return (
         <div className={styles.container}>
             <Head>
@@ -54,7 +59,13 @@ export default function Home({ data }) {
             </Head>
 
             <main className={styles.main}>
-                {/* <button className='bg-blue-500 rounded-md p-4 hover:bg-blue-600 text-white' onClick={createTest}>Create Test</button> */}
+                <form onSubmit={createTest}>
+                    <div className="flex flex-col gap-4">
+                        <input onChange={handleInput} type="text" name='name' id='name' placeholder='Name' />
+                        <input onChange={handleInput} type="text" name='email' id='email' placeholder='Email' />
+                        <button className='bg-blue-500 rounded-md p-4 hover:bg-blue-600 text-white' type='submit'>Create Test</button>
+                    </div>
+                </form>
 
                 <div className={styles.grid}>
                     {data.map((user) => (
