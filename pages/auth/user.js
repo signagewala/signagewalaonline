@@ -5,7 +5,6 @@ import connectMongo from "../../utils/connectMongo";
 import User from "../../models/userModel";
 import Auth from "../../components/layouts/Auth";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
 
 export const getServerSideProps = async () => {
   try {
