@@ -6,7 +6,6 @@ export default function Login() {
     const handleInput = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value })
     }
-    console.log(formData)
     return (
         <div>
 
@@ -17,9 +16,9 @@ export default function Login() {
                             <img
                                 src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.svg"
                                 className="w-full"
-                                alt="Phone image"
+                                alt="Phone images"
                             />
-                        </div>
+                                </div>
                         <div className="md:w-8/12 lg:w-5/12 lg:ml-20">
                             <form className='p-12'>
                                 {/* <!-- Email input --> */}
