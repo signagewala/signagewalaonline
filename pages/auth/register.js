@@ -116,7 +116,7 @@ export default function Register() {
 
                 <div className="md:flex md:flex-grow-0 md:gap-4 items-center">
                   {/* <!-- First Name input --> */}
-                  <div className="mb-6 w-6/12">
+                  <div className="mb-6 w-full md:w-6/12">
                     <input
                       onChange={handleInput}
                       autoFocus
@@ -129,7 +129,7 @@ export default function Register() {
                     />
                   </div>
                   {/* <!-- Last Name input --> */}
-                  <div className="mb-6 w-6/12">
+                  <div className="mb-6 w-full md:w-6/12">
                     <input
                       onChange={handleInput}
                       name="lname"
