@@ -5,7 +5,7 @@ import Auth from "../../components/layouts/Auth";
 
 export default function Register() {
   const router = useRouter();
-  const [formData, setFormData] = useState({});
+  const [formData, setFormData] = useState({ status: "new" });
   const [showOtp, setShowOtp] = useState(false);
   const handleInput = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -24,15 +24,16 @@ export default function Register() {
         mobile: formData.mobile,
         pass: formData.pass,
         type: formData.type,
+        status: formData.status,
       }),
     });
     const data = await res.json();
-    // console.log(data);
+    console.log(data);
     alert(`thanks for signing up ${formData.fname}`);
     document.getElementById("rform").reset();
     router.push("/auth/login");
   };
-  // console.log(formData);
+  console.log(formData);
   return (
     <div>
       <section className="h-screen">

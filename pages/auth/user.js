@@ -5,6 +5,7 @@ import connectMongo from "../../utils/connectMongo";
 import User from "../../models/userModel";
 import Auth from "../../components/layouts/Auth";
 import { useRouter } from "next/router";
+import { useState } from "react";
 // import { getServerSideProps } from "../../utils/mongodata";
 
 export const getServerSideProps = async () => {
@@ -31,7 +32,41 @@ export const getServerSideProps = async () => {
 };
 
 export default function Home({ user }) {
+  const [edit, setEdit] = useState(false);
+  const [formData, setFormData] = useState({});
+
+  const handleEdit = (e) => {
+    e.preventDefault();
+    // setEdit((edit) => true);
+    console.log(e.target.lastElementChild.innerText);
+    setFormData({
+      ...formData,
+      _id: e.target.lastElementChild.innerText,
+    });
+  };
+
+  const handleSelect = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  console.log(formData);
   const router = useRouter();
+
+  const updateUser = async () => {
+    const res = await fetch("/api/users/edit", {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        id: formData._id,
+        status: formData.status,
+      }),
+    });
+    const data = await res.json();
+    console.log(data);
+    alert(`${formData._id}'s status has been updated as ${data.data.status}`);
+  };
 
   return (
     <div className={styles.container}>
@@ -56,10 +91,12 @@ export default function Home({ user }) {
                 S. No
               </th>
               <th className="px-6 py-2 px-6 max-w-min text-left">Name</th>
-              <th className="px-6 py-2 px-6 max-w-min text-left">Brand</th>
+              <th className="px-6 py-2 px-6 max-w-min text-left">
+                Company (type)
+              </th>
               <th className="px-6 py-2 px-6 max-w-min text-left">Email</th>
               <th className="px-6 py-2 max-w-min text-center">Mobile</th>
-              <th className="px-6 py-2 max-w-min text-center">Type</th>
+              <th className="px-6 py-2 max-w-min text-center">Status</th>
               <th className="px-6 py-2 max-w-min text-center">Action</th>
             </tr>
           </thead>
@@ -74,13 +111,13 @@ export default function Home({ user }) {
                 }`}
               >
                 <td className="border-r-2 border-gray-300 max-w-min px-4 text-center">
-                  {i + 1}
+                  {i + 1}{" "}
                 </td>
                 <td className="border-r-2 border-gray-300 whitespace-nowrap w-full px-4">
                   {data.fname} {data.lname}
                 </td>
                 <td className="border-r-2 border-gray-300 whitespace-nowrap max-w-min px-4">
-                  {data.cname}
+                  {data.cname} ({data.type})
                 </td>
                 <td className="border-r-2 border-gray-300 whitespace-nowrap max-w-min px-4">
                   {data.email}
@@ -88,14 +125,47 @@ export default function Home({ user }) {
                 <td className="border-r-2 border-gray-300 whitespace-nowrap max-w-min px-4 text-center">
                   {data.mobile}
                 </td>
-                <td className="border-r-2 border-gray-300 whitespace-nowrap max-w-min px-4 text-center">
-                  {data.type}
+                <td className="border-r-2 border-gray-300 text-gray-600 whitespace-nowrap max-w-min px-4 text-center">
+                  <select
+                    name="status"
+                    id="status"
+                    onClick={handleEdit}
+                    onChange={handleSelect}
+                  >
+                    <option hidden>{data.status}</option>
+                    <option
+                      className={`${data.status == "approved" ? "hidden" : ""}`}
+                      value="approved"
+                    >
+                      approve
+                    </option>
+                    <option
+                      className={`${
+                        data.status == "suspended" ? "hidden" : ""
+                      }`}
+                      value="suspended"
+                    >
+                      suspend
+                    </option>
+                    <option
+                      className={`${
+                        data.status == "suspended" ? "" : "hidden"
+                      }`}
+                      value="approved"
+                    >
+                      re-approve
+                    </option>
+                    <option id="ide" className="hidden">
+                      {data._id}
+                    </option>
+                  </select>
+                  <span className="hidden">{data._id}</span>
                 </td>
                 <td className="border-r-2 border-gray-300 whitespace-nowrap max-w-min px-4 text-center">
-                  <a className="hover:text-emerald-500" href="">
-                    {" "}
-                    <i className="fa-regular fa-pen-to-square"></i>
-                  </a>
+                  <i
+                    onClick={updateUser}
+                    className="fa-regular fa-pen-to-square cursor-pointer"
+                  ></i>
                 </td>
               </tr>
             ))}
