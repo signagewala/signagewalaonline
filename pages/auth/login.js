@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Auth from "../../components/layouts/Auth";
 import User from "../../models/userModel";
 import connectMongo from "../../utils/connectMongo";
@@ -35,21 +35,22 @@ export default function Login({ userData }) {
   };
   const login = () => {
     const data = userData.filter((d) => d.email == formData.email)[0];
-    console.log(data);
-    console.log(formData);
 
     data && data.email == formData.email && data.pass == formData.pass
       ? data.status == "approved"
         ? data.type == "admin"
-          ? router.push("/user/admin")
+          ? router.push("/user/admin/dashboard")
           : data.type == "corp"
-          ? router.push("/user/corp")
-          : alert("you are not admin or corp")
+          ? router.push("/user/corp/dashboard")
+          : data.type == "vend"
+          ? router.push("/user/vend/dashboard")
+          : alert("pending for verification")
         : alert("pending for verification")
       : alert("notok");
 
-    // router.push("/user/admin");
+    localStorage.setItem("usercred", JSON.stringify(data));
   };
+
   return (
     <div>
       <section className="h-screen">
@@ -91,15 +92,6 @@ export default function Login({ userData }) {
                   />
                 </div>
 
-                <div className="flex justify-end items-center mb-6">
-                  <a
-                    href=""
-                    className="text-blue-600 hover:text-blue-700 focus:text-blue-700 active:text-blue-800 duration-200 transition ease-in-out"
-                  >
-                    Forgot password?
-                  </a>
-                </div>
-
                 {/* <!-- Submit button --> */}
                 <button
                   onClick={login}
@@ -110,6 +102,14 @@ export default function Login({ userData }) {
                 >
                   LogIn
                 </button>
+                <div className="flex justify-end items-center mb-6">
+                  <a
+                    href=""
+                    className="text-blue-600 hover:text-blue-700 focus:text-blue-700 active:text-blue-800 duration-200 transition ease-in-out"
+                  >
+                    Forgot password?
+                  </a>
+                </div>
 
                 <div className="flex items-center my-4 before:flex-1 before:border-t before:border-gray-300 before:mt-0.5 after:flex-1 after:border-t after:border-gray-300 after:mt-0.5">
                   <p className="text-center font-semibold mx-4 mb-0">OR</p>
@@ -165,4 +165,3 @@ export default function Login({ userData }) {
     </div>
   );
 }
-Login.layout = Auth;

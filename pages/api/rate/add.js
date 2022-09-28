@@ -1,25 +1,20 @@
 import connectMongo from "../../../utils/connectMongo";
-import Nuser from "../../../models/userModel";
+import Rates from "../../../models/genRateModel";
 
 /**
  * @param {import('next').NextApiRequest} req
  * @param {import('next').NextApiResponse} res
  */
-export default async function editUser(req, res) {
+export default async function addRate(req, res) {
   try {
-    console.log(req.body);
     console.log("CONNECTING TO MONGO");
     await connectMongo();
     console.log("CONNECTED TO MONGO");
 
-    console.log("UPDATING DOCUMENT");
-    const data = await Nuser.findOneAndUpdate(
-      {
-        _id: req.body.id,
-      },
-      { status: req.body.status }
-    );
-    console.log("UPDATED DOCUMENT");
+    console.log("CREATING DOCUMENT");
+    const data = await Rates.create(req.body);
+    console.log(req.body);
+    console.log("CREATED DOCUMENT");
 
     res.json({ data });
   } catch (error) {

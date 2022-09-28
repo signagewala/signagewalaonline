@@ -2,7 +2,12 @@ import Image from "next/image";
 import Link from "next/link";
 import React, { useState } from "react";
 
-export default function Navbar({ design }) {
+export default function Navbar({
+  design,
+  userData,
+  handleSidebar,
+  toggleSidebar,
+}) {
   const [toggleNavbar, setToggleNavbar] = useState(false);
   const handleNav = () => {
     setToggleNavbar((toggleNavbar) => !toggleNavbar);
@@ -92,9 +97,7 @@ export default function Navbar({ design }) {
                 </Link>
               ))
             ) : (
-              <>
-                <i className="fa-solid fa-circle-user text-2xl text-white hover:text-gray-200"></i>
-              </>
+              <div className="text-gray-200">Welcome' {userData.cname}</div>
             )}
           </div>
         </div>
