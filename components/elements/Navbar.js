@@ -97,7 +97,7 @@ export default function Navbar({
                 </Link>
               ))
             ) : (
-              <div className="text-gray-200">Welcome' {userData.cname}</div>
+              <div className="text-gray-200">Welcome {userData.cname}</div>
             )}
           </div>
         </div>
